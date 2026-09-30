@@ -8,7 +8,7 @@
 
 <!-- The browser link becomes available once GitHub Pages is enabled: main / (root). -->
 <p align="center">
-  <a href="https://prabs25.github.io/Chromadial/"><strong>Play in browser</strong></a>
+  <a href="https://prabs25.github.io/Chromadial/ChromaDial/"><strong>Play in browser</strong></a>
   &nbsp; · &nbsp;
   <a href="https://github.com/PRABS25/Chromadial/archive/refs/heads/main.zip"><strong>Download &amp; play offline</strong></a>
   &nbsp; · &nbsp;
@@ -57,16 +57,16 @@ Use **Free mix** whenever you want to experiment without a target. The **Sound o
 ## Play offline
 
 1. [Download the game](https://github.com/PRABS25/Chromadial/archive/refs/heads/main.zip) and extract the ZIP.
-2. Open **index.html** in your browser.
-3. On Windows, you can also double-click **Launch ChromaDial.cmd** for an app-style window.
+2. Open the **ChromaDial** folder, then open **index.html** in your browser.
+3. On Windows, you can also open the **ChromaDial** folder and double-click **Launch ChromaDial.cmd** for an app-style window.
 
 No installation or build step is required. Keep the extracted files and folders together. The game works offline after download; your best score, solved targets, streak, and sound preference are saved locally when browser storage is available.
 
 ## Make it yours
 
-To change the sounds, edit **SOUND_SETTINGS** near the top of [js/sound-effects.js](js/sound-effects.js). Adjust the volume, notes, or waveform, then save and reopen the game.
+To change the sounds, edit **SOUND_SETTINGS** near the top of [ChromaDial/js/sound-effects.js](ChromaDial/js/sound-effects.js). Adjust the volume, notes, or waveform, then save and reopen the game.
 
-To change the passing score, update the two `score >= 97` checks in [js/app.js](js/app.js). Keep the `score === 100` check for the perfect-match celebration.
+To change the passing score, update the two `score >= 97` checks in [ChromaDial/js/app.js](ChromaDial/js/app.js). Keep the `score === 100` check for the perfect-match celebration.
 
 ## Under the hood
 
@@ -76,4 +76,5 @@ CMYK is simulated on a digital display. Real ink, paper, and pigment can behave 
 
 ## License
 
-[MIT License](LICENSE) · Created by [Prabs](https://github.com/PRABS25).
+[MIT License](ChromaDial/LICENSE) · Created by [Prabs](https://github.com/PRABS25).
+
