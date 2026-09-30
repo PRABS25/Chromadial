@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10131d">
+  <title>ChromaDial</title>
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div class="brand" aria-label="ChromaDial home">
+        <img src="assets/icon.svg" alt="" class="brand-icon">
+        <div>
+          <h1>ChromaDial</h1>
+          <p>Learn colour by mixing it</p>
+        </div>
+      </div>
+
+      <nav class="mode-switch" aria-label="Game mode">
+        <button class="mode-button active" data-mode="match" type="button">
+          <span class="mode-number">01</span>
+          Match target
+        </button>
+        <button class="mode-button" data-mode="free" type="button">
+          <span class="mode-number">02</span>
+          Free mix
+        </button>
+      </nav>
+
+      <div class="topbar-actions">
+        <button id="soundButton" class="quiet-button sound-button" type="button" aria-label="Game sounds" aria-pressed="true" title="Turn game sounds off">
+          Sound on
+        </button>
+        <button id="resetStatsButton" class="quiet-button" type="button" title="Reset saved statistics">
+          Reset stats
+        </button>
+      </div>
+    </header>
+
+    <section class="workspace" aria-live="polite">
+      <article class="colour-stage target-stage" id="targetStage">
+        <div class="panel-heading">
+          <div>
+            <span class="eyebrow" id="stageEyebrow">TARGET COLOUR</span>
+            <h2 id="stageTitle">Match this colour</h2>
+          </div>
+          <span class="round-chip" id="roundChip">ROUND 1</span>
+        </div>
+
+        <div class="colour-orbit target-orbit" id="targetOrbit">
+          <div class="colour-disc" id="targetDisc"></div>
+          <div class="orbit-ring"></div>
+          <div class="orbit-runner orbit-runner-one" aria-hidden="true"><i></i></div>
+          <div class="orbit-runner orbit-runner-two" aria-hidden="true"><i></i></div>
+        </div>
+
+        <div class="target-caption">
+          <strong id="targetName">Loading…</strong>
+          <span id="targetPrompt">Use the dials to reproduce it</span>
+        </div>
+      </article>
+
+      <article class="mixer-panel">
+        <div class="panel-heading mixer-heading">
+          <div>
+            <span class="eyebrow">MIXING CONSOLE</span>
+            <h2>Turn the colour dials</h2>
+          </div>
+          <div class="model-switch" role="group" aria-label="Colour model">
+            <button class="model-button active" data-model="rgb" type="button">RGB</button>
+            <button class="model-button" data-model="cmyk" type="button">CMYK</button>
+          </div>
+        </div>
+
+        <div id="knobRack" class="knob-rack" aria-label="Colour controls"></div>
+
+        <div class="mix-readout">
+          <div class="mixture-preview" id="mixturePreview" aria-label="Current mixed colour"></div>
+          <div class="mix-data">
+            <span class="eyebrow">YOUR MIX</span>
+            <strong id="mixName">Slate</strong>
+            <span id="mixValues">RGB 128, 128, 128 · #808080</span>
+          </div>
+          <div class="similarity-block" id="similarityBlock">
+            <span>Similarity</span>
+            <strong id="similarityValue">0%</strong>
+            <div class="meter"><i id="similarityMeter"></i></div>
+          </div>
+        </div>
+
+        <div class="feedback" id="feedback" data-tone="neutral">
+          Turn a dial by dragging vertically, using the mouse wheel, or pressing the arrow keys.
+        </div>
+
+        <div class="action-row">
+          <button id="randomiseButton" class="secondary-button" type="button">Random mix</button>
+          <button id="checkButton" class="primary-button" type="button">Check match</button>
+          <button id="newRoundButton" class="secondary-button" type="button">New target</button>
+        </div>
+      </article>
+    </section>
+
+    <footer class="stats-bar">
+      <div class="stat-intro">
+        <span class="eyebrow">SESSION</span>
+        <strong>Colour sense</strong>
+      </div>
+      <div class="stat">
+        <span>Best score</span>
+        <strong id="bestStat">0</strong>
+      </div>
+      <div class="stat">
+        <span>Targets solved</span>
+        <strong id="solvedStat">0</strong>
+      </div>
+      <div class="stat">
+        <span>Current streak</span>
+        <strong id="streakStat">0</strong>
+      </div>
+      <p class="footer-note">CMYK is simulated for a digital display. Real ink and pigment behaviour varies.</p>
+    </footer>
+  </main>
+
+  <canvas id="fireworksCanvas" class="fireworks-canvas" aria-hidden="true"></canvas>
+
+  <script src="js/color-engine.js"></script>
+  <script src="js/sound-effects.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
