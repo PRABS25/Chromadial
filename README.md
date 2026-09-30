@@ -10,9 +10,9 @@
 <p align="center">
   <a href="https://prabs25.github.io/Chromadial/ChromaDial/"><strong>Play in browser</strong></a>
   &nbsp; · &nbsp;
-  <a href="https://github.com/PRABS25/Chromadial/archive/refs/heads/main.zip"><strong>Download &amp; play offline</strong></a>
+  <a href="https://github.com/PRABS25/Chromadial/raw/refs/heads/main/downloads/ChromaDial.zip"><strong>Download &amp; play offline</strong></a>
   &nbsp; · &nbsp;
-  <a href="#how-to-play">How to play</a>
+  <a href="https://github.com/PRABS25/Chromadial#how-to-play">How to play</a>
 </p>
 
 ## See it in action
@@ -56,7 +56,7 @@ Use **Free mix** whenever you want to experiment without a target. The **Sound o
 
 ## Play offline
 
-1. [Download the game](https://github.com/PRABS25/Chromadial/archive/refs/heads/main.zip) and extract the ZIP.
+1. [Download the game](https://github.com/PRABS25/Chromadial/raw/refs/heads/main/downloads/ChromaDial.zip) and extract the ZIP. This download contains only the **ChromaDial** game folder.
 2. Open the **ChromaDial** folder, then open **index.html** in your browser.
 3. On Windows, you can also open the **ChromaDial** folder and double-click **Launch ChromaDial.cmd** for an app-style window.
 
