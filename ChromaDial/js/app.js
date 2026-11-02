@@ -158,6 +158,7 @@
 
   function updateColour() {
     const rgb = currentRgb();
+    if (window.ChromaDialAdmin) window.ChromaDialAdmin.setRgb(rgb);
     const hex = E.rgbToHex(rgb);
     const nearest = E.nearestColour(rgb);
     el.mixturePreview.style.background = hex;
@@ -350,6 +351,7 @@
     setFeedback("Statistics reset.", "neutral");
   });
 
+  window.ChromaDialCurrentRgb = currentRgb;
   renderKnobs();
   renderStats();
   renderSoundButton();
