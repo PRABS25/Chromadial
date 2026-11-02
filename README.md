@@ -10,7 +10,7 @@
 <p align="center">
   <a href="https://prabs25.github.io/Chromadial/ChromaDial/"><strong>Play in browser</strong></a>
   &nbsp; · &nbsp;
-  <a href="https://github.com/PRABS25/Chromadial/raw/refs/heads/main/downloads/ChromaDial.zip"><strong>Download &amp; play offline</strong></a>
+  <a href="https://github.com/PRABS25/Chromadial/archive/refs/heads/main.zip"><strong>Download current source ZIP</strong></a>
   &nbsp; · &nbsp;
   <a href="https://github.com/PRABS25/Chromadial#how-to-play">How to play</a>
 </p>
@@ -53,6 +53,14 @@ Use **Free mix** whenever you want to experiment without a target. The **Sound o
 - **End:** set the focused dial to its maximum.
 
 </details>
+
+## ESP32 LED strip integration
+
+ChromaDial can now send the live Red, Green and Blue dial values (0–255 each) to an **ESP32-controlled WS2812B / NeoPixel-compatible addressable RGB strip** over **Bluetooth Low Energy** or **USB serial**. The game preserves the exact channel numbers; physical colour appearance varies by LEDs and displays.
+
+To open the private hardware console, **click the ChromaDial brand five times within three seconds** or use **Ctrl+Shift+A** on desktop. Create your own local username and password on first use, then connect a flashed ESP32 through the browser's device picker. The panel includes device detection, sync/output switches and red/green/blue/white/off tests.
+
+Flash the receiver from **firmware/ChromaDial_ESP32/ChromaDial_ESP32.ino**. Follow the [ESP32 installation, wiring and safety guide](docs/ESP32_RGB_SETUP.md) before powering an LED strip. BLE and serial require a compatible browser with device permissions. The browser-local admin password is not secure device-level authentication.
 
 ## Play offline
 
