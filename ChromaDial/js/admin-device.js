@@ -253,7 +253,7 @@
     await writer.write(encoder.encode("HELLO\n"));
     await Promise.race([
       handshake,
-      new Promise((_, reject) => setTimeout(() => reject(new Error("ESP32 firmware handshake timed out.")), 2500))
+      new Promise((_, reject) => setTimeout(() => reject(new Error("ESP32 firmware handshake timed out.")), 6500))
     ]);
     readyResolve = null; readyReject = null;
     const info = selected.getInfo ? selected.getInfo() : {};
