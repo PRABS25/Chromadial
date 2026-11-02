@@ -405,3 +405,40 @@ body:not(.free-mode) #randomiseButton { display: none; }
   .stats-bar { grid-template-columns: repeat(4, 1fr); }
   .footer-note { grid-column: 1 / -1; }
 }
+
+
+/* Phone layout supports Chrome Android's Bluetooth picker and touch dials. */
+@media (max-width: 759px) {
+  body { min-width: 0; min-height: 100vh; }
+  .app-shell { width: calc(100vw - 12px); min-height: calc(100vh - 12px); margin: 6px; border-radius: 17px; }
+  .topbar { display: flex; flex-wrap: wrap; gap: 10px; min-height: auto; padding: 14px 12px; }
+  .brand { flex: 1 1 auto; }
+  .brand-icon { width: 36px; height: 36px; }
+  .brand h1 { font-size: 19px; }
+  .topbar-actions { margin-left: auto; }
+  .quiet-button { font-size: 11px; padding: 8px; }
+  .mode-switch { order: 3; width: 100%; justify-content: center; }
+  .mode-button { flex: 1 1 0; justify-content: center; padding: 9px 7px; font-size: 12px; }
+  .workspace { grid-template-columns: minmax(0, 1fr); gap: 9px; padding: 9px; }
+  .colour-stage { min-height: 300px; display: grid; grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; padding: 16px; }
+  .colour-orbit { width: min(43vw, 180px); grid-row: 2; grid-column: 1; }
+  .target-caption { align-self: end; }
+  .target-caption strong { font-size: 20px; }
+  .mixer-panel { min-height: 415px; padding: 14px; gap: 10px; grid-template-rows: auto minmax(145px, 1fr) auto auto auto; }
+  .panel-heading h2 { font-size: 20px; }
+  .knob-rack { gap: 5px; padding: 4px 0; }
+  .knob-control { width: 24%; min-width: 0; gap: 6px; }
+  .knob-label { font-size: 10px; }
+  .knob-value { font-size: 10px; white-space: nowrap; }
+  .mix-readout { grid-template-columns: 42px minmax(0,1fr); padding: 9px; gap: 10px; }
+  .mixture-preview { width: 42px; }
+  .mix-data strong { font-size: 15px; }
+  .mix-data > span:last-child { overflow-wrap: anywhere; }
+  .similarity-block { grid-column: 1 / -1; }
+  .action-row { flex-wrap: wrap; }
+  .primary-button, .secondary-button { padding: 10px 12px; font-size: 12px; }
+  .stats-bar { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; padding: 12px; }
+  .stat-intro, .footer-note { grid-column: 1 / -1; }
+  .stat { padding-left: 9px; }
+  .stat-intro strong, .stat strong { font-size: 16px; }
+}
