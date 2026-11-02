@@ -7,10 +7,11 @@ This feature sends the game's RGB values (0 through 255 for each channel) to a c
 - ESP32 boards supported by Arduino-ESP32, including original ESP32, ESP32-C3 and ESP32-S3.
 - BLE connection on BLE-capable ESP32 models, using Chrome/Edge with a secure HTTPS origin. Chrome on compatible Android devices also supports Web Bluetooth.
 - USB serial connection (baud 115200) in desktop browsers that support Web Serial.
-- 5 V addressable WS2812B / NeoPixel-compatible RGB LED strips. The included program defaults to 16 LEDs on GPIO5 with GRB pixel order.
+- 5 V addressable WS2812B / NeoPixel-compatible RGB LED strips using the included addressable receiver (default GPIO5, 16 pixels, GRB order).
+- 12 V / 24 V nonaddressable common-anode RGB LED strips using the separate analog PWM receiver and three properly rated logic-level MOSFET switches.
 - The ESP32 must have the supplied ChromaDial firmware flashed. An arbitrary factory ESP32 cannot be automatically controlled.
 
-Wi-Fi control, 12 V analog RGB strips and unapproved BLE devices are not supported by this version.
+Wi-Fi control and unapproved BLE devices are not supported by this version. The included receivers support addressable or common-anode analog RGB strips; these require different electrical circuits.
 
 ## Electrical wiring
 
@@ -25,7 +26,7 @@ Add a 1000 microfarad or larger capacitor rated at least 6.3 V across strip 5V/G
 
 A conservative worst-case supply estimate is 0.06 A per RGB LED plus margin. For 16 LEDs, the maximum can approach 0.96 A, so a regulated 5 V / 2 A PSU is a reasonable starting point.
 
-12 V nonaddressable RGB strips require a three-channel MOSFET driver and different firmware. Do not connect them using these instructions. Switch off power before rewiring.
+12 V / 24 V analog strips require a three-channel low-side MOSFET driver and the **separate analog sketch** below. Do not connect an analog strip to the addressable data-pin circuit. Switch off power before rewiring.
 
 ## Flash the firmware
 
@@ -82,3 +83,34 @@ The numerical RGB triplet is transmitted without a colour conversion in RGB mode
 ## Offline package
 
 The existing downloads/ChromaDial.zip may be older than the live source. To get this feature immediately, use GitHub's Code > Download ZIP and extract the ChromaDial folder. For browser BLE/USB permission APIs, use HTTPS or localhost; local file:// access may be restricted.
+
+
+## Alternative: 12 V / 24 V analog (nonaddressable) RGB strip
+
+Use [the analog receiver firmware](../firmware/ChromaDial_AnalogRGB/ChromaDial_AnalogRGB.ino). It accepts the **same** ChromaDial BLE service, USB handshake, and `RGB,r,g,b` protocol. It drives all strip sections together using three independent 8-bit PWM outputs.
+
+**Default GPIOs on a classic ESP32 DevKit:**
+
+| ESP32 output | Circuit | Strip terminal |
+| --- | --- | --- |
+| GPIO25 | ~100–220 ohm resistor to red MOSFET gate | R negative through red MOSFET drain |
+| GPIO26 | ~100–220 ohm resistor to green MOSFET gate | G negative through green MOSFET drain |
+| GPIO27 | ~100–220 ohm resistor to blue MOSFET gate | B negative through blue MOSFET drain |
+| ESP32 GND | Common with external supply negative and all three MOSFET sources | Shared ground |
+| External supply positive | Supply at the voltage indicated on the strip, typically 12 V or 24 V | Common `+V` |
+
+**Each MOSFET:** Use a suitable **logic-level N-channel MOSFET** whose on-resistance is specified at a gate voltage compatible with **3.3 V**, rated for its colour-channel current and thermal dissipation. Put a ~10 kΩ pull-down between each MOSFET gate and source so the strip stays off during boot. Check your MOSFET's pinout, heatsinking, and maximum voltage. Add an appropriate supply fuse. Do not directly attach the LED channel to an ESP32 output. LED strip positive stays at its rated external voltage, never the ESP32's 3.3 V rail.
+
+The analog sketch uses Arduino-ESP32 **core 3.x** and `ledcAttach` / `ledcWrite`; choose board-specific GPIOs before uploading, especially on ESP32-C3/S3 where GPIO25–27 may not exist. The analog sketch also advertises Bluetooth as **ChromaDial-Analog**, which matches the game's device picker. To use it:
+
+1. Install Arduino IDE and Espressif Arduino-ESP32 3.x.
+2. Open `firmware/ChromaDial_AnalogRGB/ChromaDial_AnalogRGB.ino`.
+3. Choose your exact ESP32 board, verify available output GPIO pins, then compile/upload.
+4. Wire the external supply and the MOSFET stages with power **off**.
+5. Open the live ChromaDial game on HTTPS; enter the hidden admin panel, pair over BLE or USB, and test Red/Green/Blue/White/Off.
+
+This is **not** a constant-current LED driver, a 3-pin addressable LED strip circuit, or a driver for common-cathode strips. Do not mix the two wiring diagrams.
+
+## What colour accuracy means
+
+The game sends the RGB values with no numeric alteration. For a display and LED strip to *appear* to show the same colour, LED brightness, spectral response, white point, gamma behaviour, ambient light, and viewing conditions also matter. For colour-critical use, measure the physical strip with a colour sensor or spectrometer and apply a calibration lookup table per channel. Neither firmware claims calibrated spectral equivalence.
