@@ -6,6 +6,7 @@
   const PREF_KEY = "chromadial-esp32-prefs-v1";
   const SERVICE = "ddbe9d0a-5849-4a29-b83d-f04e7bb6d120";
   const CHARACTERISTIC = "ddbe9d0a-5849-4a29-b83d-f04e7bb6d121";
+  const INFO = "ddbe9d0a-5849-4a29-b83d-f04e7bb6d122";
   const encoder = new TextEncoder();
   const decoder = new TextDecoder();
   const $ = id => document.getElementById(id);
@@ -190,7 +191,8 @@
     const server = await device.gatt.connect();
     const service = await server.getPrimaryService(SERVICE);
     const candidate = await service.getCharacteristic(CHARACTERISTIC);
-    const identity = decoder.decode(await candidate.readValue());
+    const info = await service.getCharacteristic(INFO);
+    const identity = decoder.decode(await info.readValue());
     if (identity !== "CHROMADIAL,1") {
       throw new Error("The device did not identify itself as compatible ChromaDial firmware.");
     }
